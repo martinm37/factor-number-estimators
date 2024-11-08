@@ -6,8 +6,6 @@ import pandas as pd
 
 from src.utils.paths import get_results_path
 
-#results_df = pd.read_csv(os.path.join(get_results_path(),f"portfolio_optimization_{N}_results.csv"),index_col=0)
-
 N = 400
 years = 14
 k_max = 20
