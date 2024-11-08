@@ -2,7 +2,7 @@
 
 import numpy as np
 from src.computation_functions.data_generating_process import dgp_basic
-import src.computation_functions.aux_functions as aux
+import src.computation_functions.eigenvalues_computation as aux
 import src.estimators.factor_number.ahn_horenstein as ah
 from src.estimators.covariance_matrix.old.poet import poet_fun
 

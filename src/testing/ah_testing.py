@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from src.computation_functions.aux_functions import eigenvals_fun
+from src.computation_functions.eigenvalues_computation import eigenvals_fun
 from src.computation_functions.data_generating_process import dgp_nt_correlations,dgp_t_correlations
 from src.estimators.factor_number.ahn_horenstein import ER_fun, GR_fun
 

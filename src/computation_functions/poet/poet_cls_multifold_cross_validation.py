@@ -1,4 +1,7 @@
 
+"""
+determines the C* hyperparameter through multifold CV
+"""
 
 
 import numpy as np

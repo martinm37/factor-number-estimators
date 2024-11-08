@@ -3,10 +3,10 @@ import os
 import time
 import numpy as np
 
-from src.computation_functions.aux_functions import eigenvals_fun
-from src.computation_functions.poet_cls_c_min_calculation import poet_cls_c_min_calc
-from src.computation_functions.poet_cls_m_calculation import poet_cls_m_calculation
-from src.computation_functions.poet_cls_multifold_cross_validation import poet_cls_c_multif_cross_val
+from src.computation_functions.eigenvalues_computation import eigenvals_fun
+from src.computation_functions.poet.poet_cls_c_min_calculation import poet_cls_c_min_calc
+from src.computation_functions.poet.poet_cls_m_calculation import poet_cls_m_calculation
+from src.computation_functions.poet.poet_cls_multifold_cross_validation import poet_cls_c_multif_cross_val
 from src.estimators.covariance_matrix.poet_cls_preprocessor import poet_cls_preprocessor
 from src.estimators.covariance_matrix.poet_cls_thresholder import poet_cls_thresholder
 from src.estimators.factor_number.ahn_horenstein import ER_fun, GR_fun

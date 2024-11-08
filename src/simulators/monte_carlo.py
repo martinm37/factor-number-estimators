@@ -17,7 +17,7 @@ import numpy as np
 # -----------
 
 # auxiliary functions
-from src.computation_functions.aux_functions import eigenvals_fun
+from src.computation_functions.eigenvalues_computation import eigenvals_fun
 
 # data generating process
 from src.computation_functions.data_generating_process import dgp_nt_correlations

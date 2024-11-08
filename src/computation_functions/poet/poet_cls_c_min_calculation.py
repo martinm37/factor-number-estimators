@@ -1,4 +1,7 @@
 
+"""
+computes the minimum possible value of C* - denoted my c_min
+"""
 
 import numpy as np
 

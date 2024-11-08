@@ -3,7 +3,7 @@ import os
 import time
 import numpy as np
 
-from src.computation_functions.aux_functions import eigenvals_fun
+from src.computation_functions.eigenvalues_computation import eigenvals_fun
 from src.computation_functions.old_3.c_min_calculation import c_min_calculation
 from src.computation_functions.old_3.m_calculation_poet import m_calculation
 from src.computation_functions.old_3.multifold_cross_validation_poet import c_mcv_poet_fun

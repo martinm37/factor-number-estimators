@@ -1,6 +1,6 @@
 
 """
-auxiliary functions used in the code files for estimators
+function for efficient computing of eigenvalues
 """
 
 # importing packages
