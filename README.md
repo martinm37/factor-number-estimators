@@ -1,1 +1,1 @@
-# mase_thesis
+#Comparison of factor number estimators
