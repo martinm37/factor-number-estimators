@@ -1,6 +1,6 @@
 
 """
-Code for Ahn and Horenstein functions
+Code for Ahn, S. C., & Horenstein, A. R. (2013) estimators
 """
 
 # importing packages
@@ -10,21 +10,21 @@ import numpy as np
 
 
 """
-both functions take sorted eigenvalues of (1/(N*T)) * X@X.T or X.T@X matrix
-- the multiplication is done outside of the functions
-
+both estimators use sorted eigenvalues of (1/(N*T)) * X@X.T or X.T@X matrix
+- functions receive eigenvalues of X@X.T or X.T@X matrix
+- the multiplication is done in the functions themselves
 """
 
-# common part for both estimators
-# eigen_val, eigen_vec = aux.eigen_fun(X)
-# eigen_val_sort = aux.sorter_fun(eigen_val, eigen_vec,-1)[0]
 
-# Ahn and Horenstein 2013
+# common function for both estimators
 # -----------------------------------------------------------------------
 
 
 """
-a common function V(k)
+a common function V(k):
+
+V(k) = Sum_{j=k+1}^{m} lambda_{j} , m = min{N,T}
+-> (k+1)th eigenvalue is indexed by k
 
 V(k) = 
 k+1 + k+2 + k+3 + ... m
@@ -44,42 +44,9 @@ def V_k_fun(eigen_val_sort,k,m):
         V_k = np.sum(eigen_val_sort[k:m])
         return V_k
 
-#V_k = Sum_{j=k+1}^{m} lambda_{j} , m = min{N,T}
-# (k+1)th eigenvalue is indexed by k
-
-# can be done in a vectorized form
-
-# old code below:
-# ---------------
-
-# if k == 0:
-#     V_k = np.sum(eigen_val_sort[k:m])
-#     return V_k
-#
-# else: # k > 0
-#     V_k = np.sum(eigen_val_sort[k+1:m])
-#     return V_k
 
 
-# the two above should be identical
-
-
-# V_k = eigen_val_sort[k+1].copy()
-# # use .copy() instead of =,
-# # = is assignment operator and thus
-# # eigen_val_sort[k] would be overwritten when using this loop:
-#
-# for i in range(k+2,m):
-#     V_k += eigen_val_sort[i]
-#
-# return V_k
-
-
-
-
-
-
-# ER
+# ER estimator
 # -----------------------------------------------------------------------
 
 def ER_k(eigenval_sort,k,m):
@@ -112,13 +79,12 @@ def ER_fun(X, eigen_val_sort, k_max):
 # here we return np.argmax(output_vec) as we include 0th eigenvalue ****
 
 
-# GR
+# GR estimator
 # -----------------------------------------------------------------------
 
 
-
-
 def GR_k(eigen_val_sort,k,m):
+
     numerator = np.log(V_k_fun(eigen_val_sort,k-1,m) / V_k_fun(eigen_val_sort,k,m))
     denominator = np.log(V_k_fun(eigen_val_sort,k,m) / V_k_fun(eigen_val_sort,k+1,m))
 
@@ -126,6 +92,7 @@ def GR_k(eigen_val_sort,k,m):
 
 
 def GR_fun(X, eigen_vals_sort, k_max):
+
     N,T = X.shape
     m = np.minimum(N,T)
 

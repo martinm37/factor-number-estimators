@@ -1,28 +1,17 @@
 
 """
-python code for Wei and Chen estimator
-using parallel loops by numba
-"""
-
-"""
-***
-do a time benchmarking to see if the
-changes you want to implement are worth it,
-or if its not gonna reduce computation time a lot
+python code for Wei, J., & Chen, H. (2020) estimator
 """
 
 
 # importing packages
 # ------------------
 import numpy as np
-import numba
 
 # function for CV(R)
 # ------------------
 
-
-@numba.jit(nopython = True, parallel = True)
-def CV_R_fun_P(X,j,k,R):
+def CV_R_fun(X, j, k, R):
 
     """
     X - panel data
@@ -38,20 +27,12 @@ def CV_R_fun_P(X,j,k,R):
 
     # twice k-fold CV
     # ****************************
-    for n in numba.prange(1,int(N/j)+1):
+    for n in range(1, int(N / j) + 1):
 
         # loop over cross section
 
-        """
-        *** this loop runs in parallel ***        
-        """
-
         # Step 1
         # -------------------------
-
-        """
-        X_j should be created at once in a smart way
-        """
 
         # creating matrices Xj and X_j
         Xj = X[j*(n-1):j*(n),:]
@@ -74,11 +55,7 @@ def CV_R_fun_P(X,j,k,R):
             # loop over time
 
             # Step 2
-            # -------------------------
-
-            """
-            Xj_k should be created at once in a smart way
-            """
+            # -------------------------"
 
             # creating matrices Xjk and Xj_k
             Xjk = Xj[:,k*(t-1):k*(t)]
@@ -96,8 +73,8 @@ def CV_R_fun_P(X,j,k,R):
 
             """
             here use a faster OLS method without inv, but with solve
-            """
-            """
+            - not necessarily faster at this scale
+            
             xA = B -> x = B @ np.linalg.inv(A)
             B = Xj_k @ F_jR_k
             A = F_jR_k.T @ F_jR_k
@@ -138,15 +115,10 @@ def CV_R_fun_P(X,j,k,R):
 # function for the estimator
 # --------------------------
 
-"""
-potentially this could be parallelized as well, but I am not sure
-if this would not be too much paralellizations
-"""
-
-def TKCV_fun_P(X,j,k,R_max):
+def TKCV_fun(X, j, k, R_max):
     output_vec = np.zeros((R_max,1))
     for i in range(0,R_max):
-        CV_R_mat_i = CV_R_fun_P(X,j,k,i+1)
+        CV_R_mat_i = CV_R_fun(X, j, k, i + 1)
         output_vec[i] = np.sum(CV_R_mat_i,axis=None)
 
     return output_vec, np.argmin(output_vec)+1

@@ -4,8 +4,8 @@ import numpy as np
 import numba
 
 from src.computation_functions.data_generating_process import dgp_nt_correlations
-from src.estimators.covariance_matrix.old.poet import poet_fun
-from src.estimators.covariance_matrix.old.poet_numba import poet_fun_numba
+from src.estimators.covariance_matrix.old.poet_pca import poet_fun
+from src.estimators.covariance_matrix.old.poet_pca_numba import poet_fun_numba
 
 simulation_seed = 1372
 

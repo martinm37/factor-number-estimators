@@ -1,6 +1,6 @@
 
 """
-Onatski (2010) factor number estimator
+Onatski, A. (2010) factor number estimator
 ED - edge distribution
 """
 
@@ -31,7 +31,7 @@ def ED_fun(X, eigen_vals_sort, k_max):
     [1] - number of iterations
     """
 
-    # step 1 - adjusting the eigenvalues -> no longer : eigenvalues computed and sorted outside of this function
+    # step 1 - adjusting the eigenvalues
     # ------
     N,T = X.shape
 
@@ -126,12 +126,8 @@ def ED_fun(X, eigen_vals_sort, k_max):
 
 
 """
-i am not sure if i should add the 0 possibility also in the iterations
-- for now, i will not add it
--- i think i should add it, for a high rho it goes to zero, it should be added just in case***
-***
 maybe also add a limit on how many iterations there can be,
-On set it to max 4 iterations
+Onatski sets it to max 4 iterations - not necessary, the iterations always converge fastly enough
 """
 
 """

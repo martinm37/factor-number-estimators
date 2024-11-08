@@ -7,7 +7,7 @@ from src.computation_functions.eigenvalues_computation import eigenvals_fun
 from src.computation_functions.old_3.c_min_calculation import c_min_calculation
 from src.computation_functions.old_3.m_calculation_poet import m_calculation
 from src.computation_functions.old_3.multifold_cross_validation_poet import c_mcv_poet_fun
-from src.estimators.covariance_matrix.old.poet_numba import poet_fun
+from src.estimators.covariance_matrix.old.poet_pca_numba import poet_fun
 from src.estimators.factor_number.ahn_horenstein import ER_fun, GR_fun
 from src.estimators.factor_number.bai_ng import IC1_fun, BIC3_fun
 from src.estimators.factor_number.onatski import ED_fun

@@ -8,7 +8,7 @@ import time
 import os
 import numpy as np
 import pandas as pd
-import src.estimators.factor_number.wei_chen as wc
+import src.estimators.factor_number.old.wei_chen as wc
 from scipy.stats import norm # normal distribution
 import src.computation_functions.data_generating_process as dgp
 from src.utils.paths import get_results_path

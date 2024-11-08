@@ -1,6 +1,13 @@
 
 
+"""
+POET - principal orthogonal complement thresholding method
+- estimator of the covariance matrix by Fan, J., Liao, Y., & Mincheva, M. (2013)
 
+- based on the constrained least squares method
+
+this preprocessor code does the most computationally intensive part: eigenvector - eigenvalue decomposition
+"""
 
 
 import numpy as np

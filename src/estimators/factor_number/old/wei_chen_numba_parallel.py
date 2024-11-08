@@ -1,17 +1,28 @@
 
 """
-python code for Wei and Chen estimator
+python code for Wei, J., & Chen, H. (2020) estimator
+using parallel loops by numba
+"""
+
+"""
+***
+do a time benchmarking to see if the
+changes you want to implement are worth it,
+or if its not gonna reduce computation time a lot
 """
 
 
 # importing packages
 # ------------------
 import numpy as np
+import numba
 
 # function for CV(R)
 # ------------------
 
-def CV_R_fun(X, j, k, R):
+
+@numba.jit(nopython = True, parallel = True)
+def CV_R_fun_P(X,j,k,R):
 
     """
     X - panel data
@@ -27,15 +38,20 @@ def CV_R_fun(X, j, k, R):
 
     # twice k-fold CV
     # ****************************
-    for n in range(1, int(N / j) + 1):
+    for n in numba.prange(1,int(N/j)+1):
 
         # loop over cross section
+
+        """
+        *** this loop runs in parallel ***        
+        """
 
         # Step 1
         # -------------------------
 
         """
         X_j should be created at once in a smart way
+        - not necessarily, if it wouldn't be contiguous from the onset 
         """
 
         # creating matrices Xj and X_j
@@ -62,7 +78,8 @@ def CV_R_fun(X, j, k, R):
             # -------------------------
 
             """
-            Xj_k should be created at once in a smart way
+            X_j should be created at once in a smart way
+            - not necessarily, if it wouldn't be contiguous from the onset 
             """
 
             # creating matrices Xjk and Xj_k
@@ -81,8 +98,8 @@ def CV_R_fun(X, j, k, R):
 
             """
             here use a faster OLS method without inv, but with solve
-            """
-            """
+            - not necessarily faster at this scale
+            
             xA = B -> x = B @ np.linalg.inv(A)
             B = Xj_k @ F_jR_k
             A = F_jR_k.T @ F_jR_k
@@ -123,10 +140,13 @@ def CV_R_fun(X, j, k, R):
 # function for the estimator
 # --------------------------
 
-def TKCV_fun(X, j, k, R_max):
+
+def TKCV_fun_P(X,j,k,R_max):
     output_vec = np.zeros((R_max,1))
+
+    # sum done here as np.sum(*,axis=None) cannot be done in numba
     for i in range(0,R_max):
-        CV_R_mat_i = CV_R_fun(X, j, k, i + 1)
+        CV_R_mat_i = CV_R_fun_P(X,j,k,i+1)
         output_vec[i] = np.sum(CV_R_mat_i,axis=None)
 
     return output_vec, np.argmin(output_vec)+1

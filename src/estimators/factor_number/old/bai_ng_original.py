@@ -1,7 +1,6 @@
 
 """
-python script for Bai and Ng (2002) estimators
-using specification from Onatski (2010)
+python script for Bai, J., & Ng, S. (2002) estimators
 """
 
 """
@@ -22,11 +21,6 @@ import numpy as np
 # common functions used by all estimators
 # --------------------------------
 # --------------------------------
-
-"""
-these use the specification from Onatski(2010)
-- sums of eigenvalues
-"""
 
 def V_k_fun(X,eigen_vecs_sort, k):
 

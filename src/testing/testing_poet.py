@@ -4,7 +4,7 @@ import numpy as np
 from src.computation_functions.data_generating_process import dgp_basic
 import src.computation_functions.eigenvalues_computation as aux
 import src.estimators.factor_number.ahn_horenstein as ah
-from src.estimators.covariance_matrix.old.poet import poet_fun
+from src.estimators.covariance_matrix.old.poet_pca import poet_fun
 
 # setting seed for the DGP
 # - always to be done only once, and in the app file, not src file!!!

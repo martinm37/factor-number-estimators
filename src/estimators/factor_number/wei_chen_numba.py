@@ -1,25 +1,9 @@
 
 """
-python code for Wei and Chen estimator
-using parallel loops by numba
+python code for Wei, J., & Chen, H. (2020) estimator
+- using numba package for increased speed
+- for this the arrays need to be contiguous
 """
-
-"""
-***
-do a time benchmarking to see if the
-changes you want to implement are worth it,
-or if its not gonna reduce computation time a lot
-"""
-
-
-"""
-current issue:
-NumbaPerformanceWarning: '@' is faster on contiguous arrays, 
-called on (Array(float64, 2, 'C', False, aligned=True), Array(float64, 2, 'A', False, aligned=True))
-  XRjk_hat = LAMBDAj_kR @ F_jRk.T
-
-"""
-
 
 
 
@@ -36,7 +20,7 @@ import numba
 def CV_R_fun(X, j, k, R):
     """
     X - panel data
-    j - width of cross sectional folds
+    j - width of cross-sectional folds
     k - width of temporal folds
     R - assumed number of true factors
     """
@@ -50,17 +34,14 @@ def CV_R_fun(X, j, k, R):
     # ****************************
     for n in range(1, int(N / j) + 1):
 
-        # loop over cross section
-
-        """
-        *** this loop runs in parallel ***        
-        """
+        # loop over cross-section
 
         # Step 1
         # -------------------------
 
         """
         X_j should be created at once in a smart way
+        - not necessarily, if it wouldn't be contiguous from the onset 
         """
 
         # creating matrices Xj and X_j
@@ -80,13 +61,15 @@ def CV_R_fun(X, j, k, R):
         F_jR = np.sqrt(T) * eigenvec_sort[:, 0:R]
 
         for t in range(1, int(T / k) + 1):
+
             # loop over time
 
             # Step 2
             # -------------------------
 
             """
-            Xj_k should be created at once in a smart way
+            X_j should be created at once in a smart way
+            - not necessarily, if it wouldn't be contiguous from the onset 
             """
 
             # creating matrices Xjk and Xj_k
@@ -105,8 +88,8 @@ def CV_R_fun(X, j, k, R):
 
             """
             here use a faster OLS method without inv, but with solve
-            """
-            """
+            - not necessarily faster at this scale
+            
             xA = B -> x = B @ np.linalg.inv(A)
             B = Xj_k @ F_jR_k
             A = F_jR_k.T @ F_jR_k
@@ -124,8 +107,10 @@ def CV_R_fun(X, j, k, R):
             # -------------------------
 
             # factor estimation
-            # fixing the numba issue just in this place
+            # fixing the continguous array numba issue just in this place
             # for my use case .copy() is faster than np.ascontiguousarray()
+            # possibly bc they never are, and np.ascontiguousarray() has additional check in addition to copy()
+
             LAMBDAj_kR = LAMBDAj_kR.copy()
             F_jRk = F_jRk.copy()
 
@@ -152,11 +137,6 @@ def CV_R_fun(X, j, k, R):
 # function for the estimator
 # --------------------------
 
-"""
-potentially this could be parallelized as well, but I am not sure
-if this would not be too much paralellizations
-"""
-
 def TKCV_fun(X, fold_number, k_max):
 
     # default for the fold number is 5
@@ -166,6 +146,7 @@ def TKCV_fun(X, fold_number, k_max):
     j = int(N / fold_number)
     k = int(T / fold_number)
 
+    # sum done here as np.sum(*,axis=None) cannot be done in numba
     output_vec = np.zeros((k_max, 1))
     for i in range(0, k_max):
         CV_R_mat_i = CV_R_fun(X, j, k, i + 1)

@@ -1,5 +1,14 @@
 
 
+"""
+POET - principal orthogonal complement thresholding method
+- estimator of the covariance matrix by Fan, J., Liao, Y., & Mincheva, M. (2013)
+
+- based on the constrained least squares method
+
+this part of code thresholds the covariance matrix
+"""
+
 
 import numpy as np
 import numba
@@ -7,16 +16,17 @@ import numba
 
 @numba.jit(nopython=True)
 def poet_cls_thresholder(u_matrix, C):
+
     """
     :param u_matrix: matrix of errors
-    :param C: thresholding constant
+    :param C: thresholding constant (C*)
     :return: Sigma_u_thresholded_matrix : thresholded covariance matrix of errors
     """
 
     """
-    this function receives error matrix from the constrained least squares regression,
+    this function receives error matrix from the constrained least squares (cls) regression,
     creates the covariance matrix out of it, and thresholds it    
-    -> it does not receive a covariance matrix !!!!!! just error matrix
+    -> it does not receive a covariance matrix !!!!!! just the error matrix
     """
 
     N_dim, T_dim = u_matrix.shape
@@ -44,15 +54,6 @@ def poet_cls_thresholder(u_matrix, C):
 
     return Sigma_u_thresholded_matrix
 
-
-"""
-N = 400 w.o. numba 1.2~1.3 seconds
-        with numba 1.0~1.1 seconds
-
-for N = 150 the whole thing takes
-3 seconds less, so there is no 
-downside
-"""
 
 
 # diag_indeces = np.diag_indices_from(Sigma_u_matrix)
