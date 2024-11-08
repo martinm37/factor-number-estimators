@@ -16,7 +16,6 @@ import numpy as np
 # -------------------------------
 from src.simulators.monte_carlo import monte_carlo_beta
 from src.utils.paths import get_results_path
-from src.utils.statistical_utils import joined_mc_statistics_fun
 from src.utils.statistical_utils_latex_bold import joined_mc_stats_latex_fun
 from src.utils.statistical_utils_normal import joined_mc_stats_normal_fun
 from src.utils.utilities import df_maker
@@ -165,8 +164,7 @@ with open(os.path.join(get_results_path(),"mc_run_log.txt"), "a") as text_file:
           f" {round((t1 - t0) / (60 * 60), 2)} hour", file = text_file)
 
 
-# renaming the file - as righ now my code is a mess and this is the easiest way
-# how to quickly fix it
+# not sure if this is the correct/best way, but it works
 
 os.rename(os.path.join(get_results_path(),"mc_run_log.txt"),
           os.path.join(get_results_path(),f"mc_run_log_beta_r_{r}_kmax_{k_max}_n_{N}_t_{T}_snr_{SNR}_rho_{rho}_Jtype_{J_type}_iter_num_{iter_num}.txt"))

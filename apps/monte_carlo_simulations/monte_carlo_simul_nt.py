@@ -167,8 +167,7 @@ with open(os.path.join(get_results_path(),"mc_run_log.txt"), "a") as text_file:
           f" {round((t1 - t0) / (60 * 60), 2)} hour", file = text_file)
 
 
-# renaming the file - as righ now my code is a mess and this is the easiest way
-# how to quickly fix it
+# not sure if this is the correct/best way, but it works
 
 os.rename(os.path.join(get_results_path(),"mc_run_log.txt"),
           os.path.join(get_results_path(),f"mc_run_log_nt_r_{r}_kmax_{k_max}_snr_{SNR}_rho_{rho}_beta_{beta}_Jtype_{J_type}_iter_num_{iter_num}.txt"))
