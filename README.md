@@ -33,11 +33,9 @@ where
 For empirical comparison I examine the performance of POET covariance matrix estimator developed by Fan et al. (2013), which itself uses a factor number estimator.
 
 ## References
-Ahn, S. C., & Horenstein, A. R. (2013). Eigenvalue ratio test for the number of factors. Econometrica, 81 (3), 1203–1227. https:
-//doi.org/10.3982/ECTA8968
+Ahn, S. C., & Horenstein, A. R. (2013). Eigenvalue ratio test for the number of factors. Econometrica, 81 (3), 1203–1227. https://doi.org/10.3982/ECTA8968
 
-Bai, J., & Ng, S. (2002). Determining the number of factors in approximate factor models. Econometrica, 70 (1), 191–221. https:
-//doi.org/10.1111/1468-0262.00273
+Bai, J., & Ng, S. (2002). Determining the number of factors in approximate factor models. Econometrica, 70 (1), 191–221. https://doi.org/10.1111/1468-0262.00273
 
 Fan, J., Liao, Y., & Mincheva, M. (2013). Large Covariance Estimation by Thresholding Principal Orthogonal Complements. Journal of the Royal Statistical Society Series B: Statistical Methodology, 75 (4), 603–680. https://doi.org/10.1111/rssb.12016
 
