@@ -31,7 +31,7 @@ class POETPortfolioOptimizer:
 
         t0_optimizer = time.time()
 
-        print(f"*** this is a new version - test ***")
+        #print(f"*** this is a new version - test ***")
 
         print(f"k_hat estimator: {estimator}")
 
@@ -100,9 +100,7 @@ class POETPortfolioOptimizer:
 
             # applying de-meaning on the sample data for the estimator
             # -------------------------------------------------------
-
             POET_training_sample_k_hat = POET_training_sample.copy()
-
 
             de_meaning_functions = {
                 "IC1": time_demeaning_unit_variance,
@@ -115,10 +113,8 @@ class POETPortfolioOptimizer:
             POET_training_sample_k_hat = de_meaning_functions[estimator](POET_training_sample_k_hat)
 
 
-
             # computing eigenvalues of the demeaned training sample
             # -----------------------------------------------------
-
             eigen_vals = eigenvals_fun(POET_training_sample_k_hat)
             index = np.argsort(eigen_vals)[::-1]
             eigen_vals_sort = eigen_vals[index]
@@ -126,7 +122,6 @@ class POETPortfolioOptimizer:
 
             # estimating factor number - eigenvalue based
             # -------------------------------------------
-
             eigenvalue_based_k_estimator_dictionary = {
                 "ER": ER_fun,
                 "GR": GR_fun,
@@ -154,14 +149,11 @@ class POETPortfolioOptimizer:
 
             # preprocessing - sharing of resources
             # ------------------------------------------
-
-
             LLT_matrix, u_matrix = poet_cls_preprocessor(X = POET_training_sample, K = k_hat)
 
 
             # estimating M_hat - upper bound of C_star
             # ------------------------------------------
-
             M_hat = poet_cls_m_calculation(u_matrix=u_matrix, C_min=0.0,
                                            C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -169,7 +161,6 @@ class POETPortfolioOptimizer:
 
             # estimating C_min - lower bound of C_star
             # ----------------------------------------
-
             C_min = poet_cls_c_min_calc(u_matrix=u_matrix, C_min_start=0.0, C_min_end=M_hat,
                                         C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -179,7 +170,6 @@ class POETPortfolioOptimizer:
 
             # determining C_star by multifold cross validation, along the determined set [C_min_plus_eps + eps, M_hat]
             # ----------------------------------------
-
             epsilon = 0.1
 
             C_star = poet_cls_c_multif_cross_val(u_matrix = u_matrix,
@@ -327,7 +317,6 @@ class POETPortfolioOptimizer:
                                           self.p_o_config.out_of_sample_width), :]
 
 
-
             # transposing
             POET_training_sample = POET_training_sample.T
             POET_out_of_sample = POET_out_of_sample.T
@@ -345,7 +334,6 @@ class POETPortfolioOptimizer:
 
             # applying de-meaning on the sample data for the estimator
             # -------------------------------------------------------
-
             POET_training_sample_k_hat = POET_training_sample.copy()
 
             de_meaning_functions = {
@@ -357,7 +345,6 @@ class POETPortfolioOptimizer:
 
             # estimating factor number - cross validation based
             # -------------------------------------------
-
             cross_validation_based_k_estimator_dictionary = {
                 "TKCV": TKCV_fun
             }
@@ -380,12 +367,10 @@ class POETPortfolioOptimizer:
 
             # preprocessing - sharing of resources
             # ------------------------------------------
-
             LLT_matrix, u_matrix = poet_cls_preprocessor(X=POET_training_sample, K=k_hat)
 
             # estimating M_hat - upper bound of C_star
             # ------------------------------------------
-
             M_hat = poet_cls_m_calculation(u_matrix=u_matrix, C_min=0.0,
                                            C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -393,7 +378,6 @@ class POETPortfolioOptimizer:
 
             # estimating C_min - lower bound of C_star
             # ----------------------------------------
-
             C_min = poet_cls_c_min_calc(u_matrix=u_matrix, C_min_start=0.0, C_min_end=M_hat,
                                         C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -401,7 +385,6 @@ class POETPortfolioOptimizer:
 
             # determining C_star by multifold cross validation, along the determined set [C_min_plus_eps + eps, M_hat]
             # ----------------------------------------
-
             epsilon = 0.1
 
             C_star = poet_cls_c_multif_cross_val(u_matrix=u_matrix,
@@ -422,10 +405,8 @@ class POETPortfolioOptimizer:
             # GMV Portfolio
             # **************************************
 
-
             # estimating portfolio weights
             # ---------------------------------------
-
             ones_vector = np.ones([N_training, 1])
 
             # divisor = ones_vector.T @ np.linalg.inv(POET_K) @ ones_vector
@@ -568,7 +549,6 @@ class POETPortfolioOptimizer:
 
             # dummy value of k_hat - always the same
             # --------------------------------------
-
             k_hat = k_hat
             k_estimate_vec[t] = k_hat
 
@@ -584,12 +564,10 @@ class POETPortfolioOptimizer:
 
             # preprocessing - sharing of resources
             # ------------------------------------------
-
             LLT_matrix, u_matrix = poet_cls_preprocessor(X=POET_training_sample, K=k_hat)
 
             # estimating M_hat - upper bound of C_star
             # ------------------------------------------
-
             M_hat = poet_cls_m_calculation(u_matrix=u_matrix, C_min=0.0,
                                            C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -597,7 +575,6 @@ class POETPortfolioOptimizer:
 
             # estimating C_min - lower bound of C_star
             # ----------------------------------------
-
             C_min = poet_cls_c_min_calc(u_matrix=u_matrix, C_min_start=0.0, C_min_end=M_hat,
                                         C_grid_precision=self.poet_config.C_grid_precision)
 
@@ -605,7 +582,6 @@ class POETPortfolioOptimizer:
 
             # determining C_star by multifold cross validation, along the determined set [C_min_plus_eps + eps, M_hat]
             # ----------------------------------------
-
             epsilon = 0.1
 
             C_star = poet_cls_c_multif_cross_val(u_matrix=u_matrix,
@@ -628,7 +604,6 @@ class POETPortfolioOptimizer:
 
             # estimating portfolio weights
             # ---------------------------------------
-
             ones_vector = np.ones([N_training, 1])
 
             # divisor = ones_vector.T @ np.linalg.inv(POET_K) @ ones_vector
@@ -763,14 +738,12 @@ class BasicPortfolioOptimizer:
             # training sample
             # ***************
 
-            # computing sample covariance matrix
+            # computing sample covariance matrix - here should be (1/T) * !!!!
             # ---------------------------------------
-
             covariance_matrix = training_sample @ training_sample.T
 
             # estimating portfolio weights
             # ---------------------------------------
-
             N = covariance_matrix.shape[0]
 
             ones_vector = np.ones([N, 1])
@@ -859,7 +832,6 @@ class BasicPortfolioOptimizer:
 
             # estimating portfolio weights
             # ---------------------------------------
-
             N = training_sample.shape[0]
 
             ones_vector = np.ones([N, 1])
@@ -887,12 +859,5 @@ class BasicPortfolioOptimizer:
         solution = BasicSolverSolution(daily_returns_vec = daily_returns_vec)
 
         return solution
-
-
-
-
-
-
-
 
 

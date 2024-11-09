@@ -33,6 +33,7 @@ def poet_cls_thresholder(u_matrix, C):
 
     Sigma_u_matrix = (1/T_dim) * u_matrix @ u_matrix.T #(N x N)
 
+    # vectorized equation of entry dependent thresholds - significant computing time reduction
     Theta_ij_matrix = (1/T_dim) * (u_matrix * u_matrix) @ (u_matrix * u_matrix).T - Sigma_u_matrix * Sigma_u_matrix
 
     omega_T = 1 / np.sqrt(N_dim) + np.sqrt(np.log(N_dim) / T_dim)

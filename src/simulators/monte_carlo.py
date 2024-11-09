@@ -37,7 +37,7 @@ from src.utils.paths import get_results_path
 
 
 """
-general inputs and outputs to the funcitons:
+general inputs and outputs to the functions:
 ********************************************
 
 Monte Carlo function for * panel data
@@ -73,14 +73,14 @@ def monte_carlo_nt(dims_tbl, iter_num, burning_period, r, SNR, rho, beta, J_type
 
         """
         looping over panel data dimension tuples
-        for each tuple Lambda matrix is geenrated only once
+        for each tuple Lambda matrix is generated only once
         """
 
         t0 = time.time()  # start time for a tuple
 
         N = dims_tbl[x, 0]
 
-        # initializing random number generator class
+        # initializing random number generator class - seed is from calling function
         rng = np.random.default_rng(seed=simulation_seed)
 
         Lambda = rng.normal(0, 1, size=(N, r))  # matrix of factor loadings - generated once per setting
@@ -114,11 +114,11 @@ def monte_carlo_nt(dims_tbl, iter_num, burning_period, r, SNR, rho, beta, J_type
             iter_counter += 1
 
             if iter_counter == 100:
-                print(f"tuple: ({dims_tbl[x, 0]},{dims_tbl[x, 1]}) interation: {e + 1}")
+                print(f"tuple: ({dims_tbl[x, 0]},{dims_tbl[x, 1]}) iteration: {e + 1}")
                 iter_counter = 0
 
             """
-            Monte Carlo simulation for the given dimension tuple
+            Monte Carlo simulation for the given design
             """
 
             # DGP
@@ -222,7 +222,7 @@ def monte_carlo_snr(dims_tbl, iter_num, burning_period,N , T, r, rho, beta, J_ty
 
         """
         looping over panel data dimension tuples
-        for each tuple Lambda matrix is geenrated only once
+        for each tuple Lambda matrix is generated only once
         """
 
         t0 = time.time()  # start time for a tuple
@@ -263,7 +263,7 @@ def monte_carlo_snr(dims_tbl, iter_num, burning_period,N , T, r, rho, beta, J_ty
             iter_counter += 1
 
             if iter_counter == 100:
-                print(f"SNR: ({dims_tbl[x, 0]}) interation: {e + 1}")
+                print(f"SNR: ({dims_tbl[x, 0]}) iteration: {e + 1}")
                 iter_counter = 0
 
             """
@@ -410,7 +410,7 @@ def monte_carlo_rho(dims_tbl, iter_num, burning_period, N, T, r, SNR, beta, J_ty
             iter_counter += 1
 
             if iter_counter == 100:
-                print(f"rho: ({dims_tbl[x, 0]}) interation: {e + 1}")
+                print(f"rho: ({dims_tbl[x, 0]}) iteration: {e + 1}")
                 iter_counter = 0
 
             """
@@ -518,7 +518,7 @@ def monte_carlo_beta(dims_tbl, iter_num, burning_period,N , T, r, SNR, rho, J_ty
 
         """
         looping over panel data dimension tuples
-        for each tuple Lambda matrix is geenrated only once
+        for each tuple Lambda matrix is generated only once
         """
 
         t0 = time.time()  # start time for a tuple
@@ -558,7 +558,7 @@ def monte_carlo_beta(dims_tbl, iter_num, burning_period,N , T, r, SNR, rho, J_ty
             iter_counter += 1
 
             if iter_counter == 100:
-                print(f"beta: ({dims_tbl[x, 0]}) interation: {e + 1}")
+                print(f"beta: ({dims_tbl[x, 0]}) iteration: {e + 1}")
                 iter_counter = 0
 
             """
