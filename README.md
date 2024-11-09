@@ -42,7 +42,6 @@ Fan, J., Liao, Y., & Mincheva, M. (2013). Large Covariance Estimation by Thresho
 Onatski, A. (2010). Determining the number of factors from empirical distribution of eigenvalues. The Review of Economics and Statistics, 92 (4),
 1004–1016. https://doi.org/10.1162/REST_a_00043
 
-Wei, J., & Chen, H. (2020). Determining the number of factors in approximate factor models by twice k-fold cross validation. Economics Letters, 191, 109149. https://doi.org/10.1016/j.econlet.
-2020.109149
+Wei, J., & Chen, H. (2020). Determining the number of factors in approximate factor models by twice k-fold cross validation. Economics Letters, 191, 109149. https://doi.org/10.1016/j.econlet.2020.109149
 
 
