@@ -12,7 +12,7 @@ For theoretical comparison I employ four different Monte Carlo simulation design
 Running the following script produces factor numbers and their summary statistics, when the estimation is done on DGP with the parameters `[1]` to `[7]`.
 
 ```python
-monte_carlo_simul_nt [1] [2] [3] [4] [5] [6] [7]
+python3 -m apps.monte_carlo_simulations.nt_simulation [1] [2] [3] [4] [5] [6] [7]
 ```
 
 where 
@@ -36,7 +36,7 @@ For data, I have used the daily returns of S&P500 index constituents, obtained f
 Running the following script produces the results of portfolio optimization, as well as statistics about POET performance across different factor number estimators:
 
 ```Python
-portfolio_optimization [1] [2] [3] [4]
+python3 -m apps.portfolio_optimization.portfolio_optimization [1] [2] [3] [4]
 ```
 where 
 ```
