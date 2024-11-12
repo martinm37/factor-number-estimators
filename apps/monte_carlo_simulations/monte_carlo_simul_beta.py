@@ -14,7 +14,7 @@ import numpy as np
 
 # importing code from other files
 # -------------------------------
-from src.simulators.monte_carlo import monte_carlo_beta
+from src.simulators.monte_carlo_designs import monte_carlo_beta
 from src.utils.paths import get_results_path
 from src.utils.statistical_utils_latex_bold import joined_mc_stats_latex_fun
 from src.utils.statistical_utils_normal import joined_mc_stats_normal_fun

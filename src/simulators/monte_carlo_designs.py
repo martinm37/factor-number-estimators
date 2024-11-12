@@ -124,9 +124,9 @@ def monte_carlo_nt(dims_tbl, iter_num, burning_period, r, SNR, rho, beta, J_type
             # DGP
             # -------
             X_raw = dgp_nt_correlations(Lambda = Lambda, N = dims_tbl[x, 0], T = dims_tbl[x, 1],
-                                    burning_period = burning_period,
-                                    r = r, SNR = SNR, rho = rho, beta = beta, J = J,
-                                    rng = rng)
+                                        burning_period = burning_period,
+                                        r = r, SNR = SNR, rho = rho, beta = beta, J = J,
+                                        rng = rng)
 
 
             """
@@ -155,21 +155,6 @@ def monte_carlo_nt(dims_tbl, iter_num, burning_period, r, SNR, rho, beta, J_type
 
             output_cube[x, 6, e] = TKCV_fun(X_tduv, fold_number=5, k_max=k_max)[0]
 
-
-            # no transformation
-            # **********************************************************************************************************
-            # **********************************************************************************************************
-
-            # # Computing eigenvalues
-            # # ----------------------
-            # eigen_vals_raw = eigenvals_fun(X_raw)
-            # index_raw = np.argsort(eigen_vals_raw)[::-1]
-            # eigen_vals_raw_sort = eigen_vals_raw[index_raw]
-            #
-            # # computing k_hat
-            # # ----------------
-            # # dividing ALWAYS done inside the function
-            # output_cube[x, 3, e] = ED_fun(X_raw, eigen_vals_raw_sort, k_max = k_max)[0]
 
             # double demeaning
             # **********************************************************************************************************
@@ -273,9 +258,9 @@ def monte_carlo_snr(dims_tbl, iter_num, burning_period,N , T, r, rho, beta, J_ty
             # DGP
             # -------
             X_raw = dgp_nt_correlations(Lambda = Lambda, N = N, T = T,
-                                    burning_period = burning_period,
-                                    r = r, SNR = dims_tbl[x,0], rho = rho, beta = beta, J = J,
-                                    rng = rng)
+                                        burning_period = burning_period,
+                                        r = r, SNR = dims_tbl[x,0], rho = rho, beta = beta, J = J,
+                                        rng = rng)
 
             """
             specific transformations of panel data set X
@@ -303,20 +288,6 @@ def monte_carlo_snr(dims_tbl, iter_num, burning_period,N , T, r, rho, beta, J_ty
 
             output_cube[x, 6, e] = TKCV_fun(X_time_dem_unit_var, fold_number=5, k_max=k_max)[0]
 
-            # no transformation
-            # **********************************************************************************************************
-            # **********************************************************************************************************
-
-            # # Computing eigenvalues
-            # # ----------------------
-            # eigen_vals_raw = eigenvals_fun(X_raw)
-            # index_raw = np.argsort(eigen_vals_raw)[::-1]
-            # eigen_vals_raw_sort = eigen_vals_raw[index_raw]
-            #
-            # # computing k_hat
-            # # ----------------
-            # # dividing ALWAYS done inside the function
-            # output_cube[x, 3, e] = ED_fun(X_raw, eigen_vals_raw_sort, k_max=k_max)[0]
 
             # double demeaning
             # **********************************************************************************************************
@@ -420,9 +391,9 @@ def monte_carlo_rho(dims_tbl, iter_num, burning_period, N, T, r, SNR, beta, J_ty
             # DGP
             # -------
             X_raw = dgp_nt_correlations(Lambda = Lambda, N = N, T = T,
-                                    burning_period = burning_period,
-                                    r = r, SNR = SNR, rho = dims_tbl[x,0], beta = beta, J = J,
-                                    rng = rng)
+                                        burning_period = burning_period,
+                                        r = r, SNR = SNR, rho = dims_tbl[x,0], beta = beta, J = J,
+                                        rng = rng)
 
             """
             specific transformations of panel data set X
@@ -451,24 +422,8 @@ def monte_carlo_rho(dims_tbl, iter_num, burning_period, N, T, r, SNR, beta, J_ty
 
             output_cube[x, 6, e] = TKCV_fun(X_time_dem_unit_var, fold_number=5, k_max=k_max)[0]
 
-            # no transformation
-            # - for Onatski estimator
-            # **********************************************************************************************************
-            # **********************************************************************************************************
-
-            # # Computing eigenvalues
-            # # ----------------------
-            # eigen_vals_raw = eigenvals_fun(X_raw)
-            # index_raw = np.argsort(eigen_vals_raw)[::-1]
-            # eigen_vals_raw_sort = eigen_vals_raw[index_raw]
-            #
-            # # computing k_hat
-            # # ----------------
-            # # dividing ALWAYS done inside the function
-            # output_cube[x, 3, e] = ED_fun(X_raw, eigen_vals_raw_sort, k_max=k_max)[0]
 
             # double demeaning
-            # - for Ahn and Horenstein estimators
             # **********************************************************************************************************
             # **********************************************************************************************************
 
@@ -568,9 +523,9 @@ def monte_carlo_beta(dims_tbl, iter_num, burning_period,N , T, r, SNR, rho, J_ty
             # DGP
             # -------
             X_raw = dgp_nt_correlations(Lambda = Lambda, N = N, T = T,
-                                    burning_period = burning_period,
-                                    r = r, SNR = SNR, rho = rho, beta = dims_tbl[x,0], J = J,
-                                    rng = rng)
+                                        burning_period = burning_period,
+                                        r = r, SNR = SNR, rho = rho, beta = dims_tbl[x,0], J = J,
+                                        rng = rng)
 
             """
             specific transformations of panel data set X
@@ -599,24 +554,7 @@ def monte_carlo_beta(dims_tbl, iter_num, burning_period,N , T, r, SNR, rho, J_ty
 
             output_cube[x, 6, e] = TKCV_fun(X_time_dem_unit_var, fold_number=5, k_max=k_max)[0]
 
-            # no transformation
-            # - for Onatski estimator
-            # **********************************************************************************************************
-            # **********************************************************************************************************
-
-            # # Computing eigenvalues
-            # # ----------------------
-            # eigen_vals_raw = eigenvals_fun(X_raw)
-            # index_raw = np.argsort(eigen_vals_raw)[::-1]
-            # eigen_vals_raw_sort = eigen_vals_raw[index_raw]
-            #
-            # # computing k_hat
-            # # ----------------
-            # # dividing ALWAYS done inside the function
-            # output_cube[x, 3, e] = ED_fun(X_raw, eigen_vals_raw_sort, k_max=k_max)[0]
-
             # double demeaning
-            # - for Ahn and Horenstein estimators
             # **********************************************************************************************************
             # **********************************************************************************************************
 
