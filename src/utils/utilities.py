@@ -97,19 +97,21 @@ def under_exact_over_estimation_stat_fun(output_cube, true_r):
             underestimated = int(np.round(len(output_cube_subset[output_cube_subset <  true_r ]) / iter_num * 100 , decimals = 0))
             exact = int(np.round(len(output_cube_subset[output_cube_subset == true_r]) / iter_num * 100, decimals=0))
             overestimated = int(np.round(len(output_cube_subset[output_cube_subset >  true_r  ]) / iter_num * 100 , decimals = 0))
-            assert underestimated + exact + overestimated == 100, "something's wrong"
+
+            #assert underestimated + exact + overestimated == 100, "something's wrong"
+
             result[i,j] = f"{underestimated}/{exact}/{overestimated}"
 
             #print("hello there")
 
-
     return result
 
-
-
-
-
-
+"""
+assert underestimated + exact + overestimated == 100, "something's wrong"
+--->
+apparently this is more complicated than I thought, e.g. i have % = {33.33, 33.33, 33.33}, 
+which of them do I round up to 34% ??????
+"""
 
 
 

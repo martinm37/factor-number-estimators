@@ -50,12 +50,3 @@ def time_demeaning_unit_variance(data):
 
     return data
 
-
-
-
-
-
-"""
-T_mean = np.mean(data, axis=0).reshape(1, -1)  # time_mean -> row vector
-this should be axis=1 !!!! but it doesnt matter above as i substract both, but here it matters!!!
-"""
