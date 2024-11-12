@@ -68,7 +68,7 @@ burning_period = 100
 # -----------------------------------------------------------------------
 
 
-print(f"log file for rho_n_{N}_t_{T}_snr_{SNR}_beta_{beta}Jtype_{J_type}_beta_{beta}")
+print(f"log file for rho_n_{N}_t_{T}_snr_{SNR}_beta_{beta}_Jtype_{J_type}_iter_num_{iter_num}")
 
 
 with open(os.path.join(get_results_path(),"mc_run_log.txt"), "a") as text_file:

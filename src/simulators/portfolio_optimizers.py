@@ -31,7 +31,6 @@ class POETPortfolioOptimizer:
 
         t0_optimizer = time.time()
 
-        #print(f"*** this is a new version - test ***")
 
         print(f"k_hat estimator: {estimator}")
 
@@ -65,10 +64,6 @@ class POETPortfolioOptimizer:
         for t in range(iter_num):
 
             iter_counter += 1
-
-            # if iter_counter == 10:
-            #     print(f"iteration number: {t + 1}")
-            #     iter_counter = 0
 
             portfolio_optim_iter_start_time = time.time()
 
@@ -179,8 +174,6 @@ class POETPortfolioOptimizer:
 
             C_star_vec[t] = C_star
 
-            # C_star = 0.5
-
             # calculating POET, after the C_star has been determined
             # ---------------------------------
             Sigma_u_thresholded_matrix = poet_cls_thresholder(u_matrix=u_matrix, C=C_star)
@@ -220,8 +213,6 @@ class POETPortfolioOptimizer:
             # portfolio_return = sum_of_individual_returns.T @ portfolio_weights
             # storage_vector_return[t] = portfolio_return
 
-            # C_min_plus_eps = 0
-            # M_hat = 0
 
             portfolio_optim_iter_end_time = time.time()
 
@@ -240,13 +231,13 @@ class POETPortfolioOptimizer:
 
         t1_optimizer = time.time()
 
-        print(f"POET with k_hat estimator {estimator}: total epalsed time: "
+        print(f"POET with k_hat estimator {estimator}: total elapsed time: "
               f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
               f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
               f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour")
 
         with open(os.path.join(get_results_path(), "portfolio_optim_log.txt"), "a") as text_file:
-            print(f"POET with k_hat estimator {estimator}: total epalsed time: "
+            print(f"POET with k_hat estimator {estimator}: total elapsed time: "
                   f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
                   f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
                   f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour",file=text_file)
@@ -298,10 +289,6 @@ class POETPortfolioOptimizer:
         for t in range(iter_num):
 
             iter_counter += 1
-
-            # if iter_counter == 10:
-            #     print(f"iteration number: {t + 1}")
-            #     iter_counter = 0
 
             portfolio_optim_iter_start_time = time.time()
 
@@ -394,7 +381,6 @@ class POETPortfolioOptimizer:
 
             C_star_vec[t] = C_star
 
-            # C_star = 0.5
 
             # calculating POET, after the C_star has been determined
             # ---------------------------------
@@ -456,13 +442,13 @@ class POETPortfolioOptimizer:
 
         t1_optimizer = time.time()
 
-        print(f"POET with k_hat estimator {estimator}: total epalsed time: "
+        print(f"POET with k_hat estimator {estimator}: total elapsed time: "
               f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
               f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
               f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour")
 
         with open(os.path.join(get_results_path(), "portfolio_optim_log.txt"), "a") as text_file:
-            print(f"POET with k_hat estimator {estimator}: total epalsed time: "
+            print(f"POET with k_hat estimator {estimator}: total elapsed time: "
                   f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
                   f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
                   f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour",file=text_file)
@@ -515,10 +501,6 @@ class POETPortfolioOptimizer:
         for t in range(iter_num):
 
             iter_counter += 1
-
-            # if iter_counter == 10:
-            #     print(f"iteration number: {t + 1}")
-            #     iter_counter = 0
 
             portfolio_optim_iter_start_time = time.time()
 
@@ -591,7 +573,6 @@ class POETPortfolioOptimizer:
 
             C_star_vec[t] = C_star
 
-            # C_star = 0.5
 
             # calculating POET, after the C_star has been determined
             # ---------------------------------
@@ -652,13 +633,13 @@ class POETPortfolioOptimizer:
 
         t1_optimizer = time.time()
 
-        print(f"POET with constant k_hat value - {k_hat}: total epalsed time: "
+        print(f"POET with constant k_hat value - {k_hat}: total elapsed time: "
               f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
               f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
               f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour")
 
         with open(os.path.join(get_results_path(), "portfolio_optim_log.txt"), "a") as text_file:
-            print(f"POET with constant k_hat value - {k_hat}: total epalsed time: "
+            print(f"POET with constant k_hat value - {k_hat}: total elapsed time: "
                   f" {round(t1_optimizer - t0_optimizer, 2)} sec,"
                   f" {round((t1_optimizer - t0_optimizer) / 60, 2)} min,"
                   f" {round((t1_optimizer - t0_optimizer) / (60 * 60), 2)} hour",file=text_file)
@@ -768,7 +749,7 @@ class BasicPortfolioOptimizer:
 
         t1_optimizer = time.time()
 
-        print(f"sample_covariance total epalsed time: {t1_optimizer - t0_optimizer} seconds")
+        print(f"sample_covariance total elapsed time: {t1_optimizer - t0_optimizer} seconds")
 
         solution = BasicSolverSolution(daily_returns_vec = daily_returns_vec)
 
@@ -854,7 +835,7 @@ class BasicPortfolioOptimizer:
 
         t1_optimizer = time.time()
 
-        print(f"1/N portfolio total epalsed time: {t1_optimizer - t0_optimizer} seconds")
+        print(f"1/N portfolio total elapsed time: {t1_optimizer - t0_optimizer} seconds")
 
         solution = BasicSolverSolution(daily_returns_vec = daily_returns_vec)
 
