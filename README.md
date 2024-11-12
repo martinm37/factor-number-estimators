@@ -1,9 +1,9 @@
 # Comparison of factor number estimators
 This code provides a means of comparing performance of factor number estimators by a theoretical Monte Carlo study and an empirical study based on portfolio optimization.
 
-I focus on 7 different estimators from 4 papers: $\text{PC}_1$, $\text{IC}_1$ and $\text{BIC}_3$ from Bai and Ng (2002), $\text{ED}$ by Onatski (2010), $\text{ER}$ and $\text{GR}$ by Ahn and Horenstein (2013), and $\text{TKCV}$ by Wei and Chen (2020).
+I focus on 7 different estimators from 4 papers: $\text{PC}_1$, $\text{IC}_1$ and $\text{BIC}_3$ by Bai and Ng (2002), $\text{ED}$ by Onatski (2010), $\text{ER}$ and $\text{GR}$ by Ahn and Horenstein (2013), and $\text{TKCV}$ by Wei and Chen (2020).
 
-The code presented here is an edited version of the code I have submitted to obtain the Master's Thesis from M.Sc. in Advanced Studies in Economics at KU Leuven in August 2024.
+The code presented here is an edited version of the code I have submitted to obtain the Master's Thesis from M.Sc. in Advanced Studies in Economics at KU Leuven in September 2024.
 
 ## Theoretical comparison
 
@@ -27,10 +27,26 @@ where
 ```
 
 
-
-
 ## Empirical comparison
-For empirical comparison I examine the performance of POET covariance matrix estimator developed by Fan et al. (2013), which itself uses a factor number estimator.
+
+To judge the performance of the studied factor number estimators on real data, I have done a portfolio optimization study. Specifically, I have explored the performance of global minimal variance (GMV) portfolios formed with POET covariance matrix estimator, developed by Fan et al. (2013). This covariance matrix estimator itself requires a factor number estimator for its functioning.
+
+For data, I have used the daily returns of S&P500 index constituents, obtained from Refinitiv Eikon Datastream at FEB, KU Leuven. The data itself is not published on this repository.
+
+Running the following script produces the results of portfolio optimization, as well as statistics about POET performance across different factor number estimators:
+
+```Python
+portfolio_optimization [1] [2] [3] [4]
+```
+where 
+```
+[1]: N - number of stocks (int)
+[2]: years - length of data sample (int)
+[3]: k_max - upper limit for factor estimation (int)
+[4]: k_min - lower limit for factor estimation (int)
+```
+
+
 
 ## References
 Ahn, S. C., & Horenstein, A. R. (2013). Eigenvalue ratio test for the number of factors. Econometrica, 81 (3), 1203–1227. https://doi.org/10.3982/ECTA8968
