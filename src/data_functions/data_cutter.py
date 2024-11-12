@@ -1,15 +1,12 @@
 
 
 import os
-import time
 import datetime
 import pandas as pd
-import numpy as np
-from numpy.random import randint
 
 
 from src.data_functions.data_transform_functions import daily_returns_fun, correlations_list, max_correlation
-from src.utils.paths import get_results_path,get_data_path
+from src.utils.paths import get_data_path
 
 """
 hyperparameters
@@ -53,19 +50,17 @@ data_market_cap = data_market_cap.dropna(axis = "columns",how = "any") # drops a
 # calculating the daily returns
 data_daily_returns = daily_returns_fun(data_price)
 
-# removing the entries which are overly correlated
-# ------------------------------------------------
-cutoff = 0.85
-corr_list = correlations_list(data_daily_returns, cutoff =cutoff)
 
-corr_list_mc = [s + " - MARKET VALUE" for s in corr_list]
-
-data_daily_returns = data_daily_returns.drop(columns = corr_list)
-data_market_cap = data_market_cap.drop(columns = corr_list_mc)
-
-
-
-
+# # removing the entries which are overly correlated
+# # ------------------------------------------------
+# cutoff = 0.85
+# corr_list = correlations_list(data_daily_returns, cutoff =cutoff)
+#
+# corr_list_mc = [s + " - MARKET VALUE" for s in corr_list]
+#
+# data_daily_returns = data_daily_returns.drop(columns = corr_list)
+# data_market_cap = data_market_cap.drop(columns = corr_list_mc)
+#
 
 
 """
@@ -113,8 +108,9 @@ data_daily_returns_selected = data_daily_returns.drop(columns = stocks_to_drop)
 
 
 # corr check
-maxcorr = max_correlation(data_daily_returns_selected)
-assert maxcorr < cutoff, f"correlation is too high!!: {maxcorr}"
+# maxcorr = max_correlation(data_daily_returns_selected)
+# assert maxcorr < cutoff, f"correlation is too high!!: {maxcorr}"
+
 
 years = 14
 
@@ -131,9 +127,10 @@ data_daily_returns_selected = data_daily_returns_selected[(data_daily_returns_se
                                                           & (data_daily_returns_selected["UTCTIME"] < end_date_final)]
 
 
-# corr check
-maxcorr = max_correlation(data_daily_returns_selected)
-assert maxcorr < cutoff, f"correlation is too high!!: {maxcorr}"
+# # corr check
+# maxcorr = max_correlation(data_daily_returns_selected)
+# assert maxcorr < cutoff, f"correlation is too high!!: {maxcorr}"
+
 
 years = 10
 

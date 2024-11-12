@@ -21,27 +21,26 @@ N = int(sys.argv[1])
 years = int(sys.argv[2])
 k_max = int(sys.argv[3])
 k_min = int(sys.argv[4])
-dataset = sys.argv[5] # orig or edit
 
 # N = 150
 # years = 14
 # k_max = 8
 # k_min = 0
-# dataset = "orig"
+
 
 t0_optim = time.time()
 
 
 # importing data
-daily_returns_df = pd.read_csv(os.path.join(get_data_path(),f"SP500_{N}_daily_returns_years_{years}_{dataset}.csv"))
+daily_returns_df = pd.read_csv(os.path.join(get_data_path(),f"SP500_{N}_daily_returns_years_{years}.csv"))
 
 
 # starting the log file
-print(f"log file for SP500_{N}_daily_returns_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset} data")
+print(f"log file for SP500_{N}_daily_returns_years_{years}_kmax_{k_max}_kmin_{k_min} data")
 
 
 with open(os.path.join(get_results_path(),"portfolio_optim_log.txt"), "a") as text_file:
-    print(f"log file for SP500_{N}_daily_returns_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset} data", file = text_file)
+    print(f"log file for SP500_{N}_daily_returns_years_{years}_kmax_{k_max}_kmin_{k_min} data", file = text_file)
 
 
 
@@ -212,13 +211,13 @@ t_elap_df.insert(0, "UTCTIME", time_col_short)
 
 
 # exporting
-returns_df.to_csv(os.path.join(get_results_path(), f"portfolio_optimization_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}_results.csv"))
+returns_df.to_csv(os.path.join(get_results_path(), f"portfolio_optimization_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_results.csv"))
 
-c_min_est_df.to_csv(os.path.join(get_results_path(), f"c_min_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"))
-m_est_df.to_csv(os.path.join(get_results_path(), f"m_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"))
-c_star_df.to_csv(os.path.join(get_results_path(), f"c_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"))
-k_hat_df.to_csv(os.path.join(get_results_path(), f"k_hat_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"))
-t_elap_df.to_csv(os.path.join(get_results_path(), f"t_elap_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"))
+c_min_est_df.to_csv(os.path.join(get_results_path(), f"c_min_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"))
+m_est_df.to_csv(os.path.join(get_results_path(), f"m_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"))
+c_star_df.to_csv(os.path.join(get_results_path(), f"c_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"))
+k_hat_df.to_csv(os.path.join(get_results_path(), f"k_hat_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"))
+t_elap_df.to_csv(os.path.join(get_results_path(), f"t_elap_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"))
 
 
 t1_optim = time.time()
@@ -239,7 +238,7 @@ with open(os.path.join(get_results_path(),"portfolio_optim_log.txt"), "a") as te
 
 
 os.rename(os.path.join(get_results_path(),"portfolio_optim_log.txt"),
-          os.path.join(get_results_path(),f"portfolio_optim_log_N_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.txt"))
+          os.path.join(get_results_path(),f"portfolio_optim_log_N_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.txt"))
 
 
 

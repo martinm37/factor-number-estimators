@@ -19,7 +19,6 @@ N = 400
 years = 14
 k_max = 20
 k_min = 0
-dataset = "orig"
 
 figure_extension = "eps"
 
@@ -31,13 +30,13 @@ stepsize = 4
 if years == 14:
 
     # importing data
-    results_df = pd.read_csv(os.path.join(get_results_path(),f"portfolio_optimization_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}_results{suffix}.csv"),index_col=0)
+    results_df = pd.read_csv(os.path.join(get_results_path(),f"portfolio_optimization_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_results{suffix}.csv"),index_col=0)
     results_df["UTCTIME"] = pd.to_datetime(results_df["UTCTIME"], format="%Y-%m-%d")
 
 elif years == 10:
 
     # importing data
-    results_df = pd.read_csv(os.path.join(get_results_path(), f"portfolio_optimization_{N}_years_{14}_kmax_{k_max}_kmin_{k_min}_{dataset}_results{suffix}.csv"),index_col=0)
+    results_df = pd.read_csv(os.path.join(get_results_path(), f"portfolio_optimization_{N}_years_{14}_kmax_{k_max}_kmin_{k_min}_results{suffix}.csv"),index_col=0)
     results_df["UTCTIME"] = pd.to_datetime(results_df["UTCTIME"], format="%Y-%m-%d")
     cutoff_date = datetime.datetime(2020, 1, 3)
     results_df = results_df[(results_df["UTCTIME"] <= cutoff_date)]
@@ -55,7 +54,7 @@ desired_estimators = ["BN_IC1", "BN_BIC3","ON_ED","AH_ER", "AH_GR","WC_TKCV","du
 # done for both year lengths
 poet_stats = poet_stats_full_rounded(results_df,desired_estimators)
 
-poet_stats.to_csv(os.path.join(get_results_path(), f"summary_stats_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.csv"),index=True)
+poet_stats.to_csv(os.path.join(get_results_path(), f"summary_stats_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}.csv"),index=True)
 
 
 
@@ -63,10 +62,10 @@ poet_stats.to_csv(os.path.join(get_results_path(), f"summary_stats_{N}_years_{ye
 if years == 14:
     # done just for the 14 year long time series
 
-    k_hat_df = pd.read_csv(os.path.join(get_results_path(),f"k_hat_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}{suffix}.csv"),index_col=0)
-    c_min_df = pd.read_csv(os.path.join(get_results_path(),f"c_min_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}{suffix}.csv"),index_col=0)
-    m_star_df = pd.read_csv(os.path.join(get_results_path(),f"m_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}{suffix}.csv"),index_col=0)
-    c_star_df = pd.read_csv(os.path.join(get_results_path(),f"c_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}{suffix}.csv"),index_col=0)
+    k_hat_df = pd.read_csv(os.path.join(get_results_path(),f"k_hat_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}{suffix}.csv"),index_col=0)
+    c_min_df = pd.read_csv(os.path.join(get_results_path(),f"c_min_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}{suffix}.csv"),index_col=0)
+    m_star_df = pd.read_csv(os.path.join(get_results_path(),f"m_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}{suffix}.csv"),index_col=0)
+    c_star_df = pd.read_csv(os.path.join(get_results_path(),f"c_star_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}{suffix}.csv"),index_col=0)
 
     k_hat_df["UTCTIME"] = pd.to_datetime(k_hat_df["UTCTIME"], format="%Y-%m-%d")
     c_min_df["UTCTIME"] = pd.to_datetime(c_min_df["UTCTIME"], format="%Y-%m-%d")
@@ -74,7 +73,7 @@ if years == 14:
     c_star_df["UTCTIME"] = pd.to_datetime(c_star_df["UTCTIME"], format="%Y-%m-%d")
 
 
-    t_elap_df = pd.read_csv(os.path.join(get_results_path(),f"t_elap_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}_{dataset}{suffix}.csv"),index_col=0)
+    t_elap_df = pd.read_csv(os.path.join(get_results_path(),f"t_elap_{N}_years_{years}_kmax_{k_max}_kmin_{k_min}{suffix}.csv"),index_col=0)
 
     t_elap_df = t_elap_df.iloc[1:,1:] # excluding the compilation time, and date column, in preparation for mean statistics
 
@@ -91,12 +90,12 @@ if years == 14:
 
     #fig = optim_subplots(k_hat_df, f"estimated factor number, N = {N}", [0, 9])
     fig = optim_subplots_v2(k_hat_df, f"estimated factor number, N = {N}", [0, k_max + 1],stepsize = stepsize)
-    fig.savefig(os.path.join(get_results_path(), f"estimated_factor_numbers_N_{N}_years{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.{figure_extension}"))
+    fig.savefig(os.path.join(get_results_path(), f"estimated_factor_numbers_N_{N}_years{years}_kmax_{k_max}_kmin_{k_min}.{figure_extension}"))
     # plt.show()
 
     #fig = optim_subplots_triple(c_min_df, c_star_df, m_star_df, f"estimated C_star and its interval, N = {N}")
     fig = optim_subplots_triple_v2(c_min_df, c_star_df, m_star_df, f"estimated C_star and its interval, N = {N}")
-    fig.savefig(os.path.join(get_results_path(), f"estimated_c_star_N_{N}_years{years}_kmax_{k_max}_kmin_{k_min}_{dataset}.{figure_extension}"))
+    fig.savefig(os.path.join(get_results_path(), f"estimated_c_star_N_{N}_years{years}_kmax_{k_max}_kmin_{k_min}.{figure_extension}"))
     # plt.show()
 
 
@@ -127,52 +126,52 @@ if years == 14:
 
     results_monthly_df.insert(0, "UTCTIME", c_star_df["UTCTIME"])
 
-    # plt.figure(figsize=(6.4 * 1.5, 4.8))
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["ED"], color = "tab:green",label = "ED")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["ER"], color = "tab:red",label = "ER")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["GR"], color = "tab:blue",label = "GR")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["one_over_n"], color = "tab:orange",label = "1/n")
-    # plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
-    # plt.title(f"comparison of monthly returns, N = {N}")
-    # plt.legend()
-    # plt.savefig(os.path.join(get_results_path(),f"returns_comparison_1_N_{N}_years{years}.{figure_extension}"))
-    # #plt.show()
-
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["IC1"],label = "IC1")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["BIC3"],label = "BIC3")
-    # plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
-    # plt.title(f"monthly returns, N = {N}")
-    # plt.legend()
-    # plt.show()
-
-
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["IC1"],label = "IC1")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["TKCV"],label = "TKCV")
-    # #plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["one_over_n"],label = "1/n")
-    # plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
-    # plt.title(f"monthly returns, N = {N}")
-    # plt.legend()
-    # plt.show()
-
-
-    # plt.figure(figsize=(6.4 * 1.5, 4.8))
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["GR"],label = "GR")
-    # plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["TKCV"],label = "TKCV")
-    # plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
-    # plt.title(f"comparison of monthly returns, N = {N}")
-    # plt.legend()
-    # plt.savefig(os.path.join(get_results_path(),f"returns_comparison_2_N_{N}_years{years}.{figure_extension}"))
-    # #plt.show()
-
-
-
+#     plt.figure(figsize=(6.4 * 1.5, 4.8))
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["ED"], color = "tab:green",label = "ED")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["ER"], color = "tab:red",label = "ER")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["GR"], color = "tab:blue",label = "GR")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["one_over_n"], color = "tab:orange",label = "1/n")
+#     plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
+#     plt.title(f"comparison of monthly returns, N = {N}")
+#     plt.legend()
+#     plt.savefig(os.path.join(get_results_path(),f"returns_comparison_1_N_{N}_years{years}.{figure_extension}"))
+#     #plt.show()
+#
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["IC1"],label = "IC1")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["BIC3"],label = "BIC3")
+#     plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
+#     plt.title(f"monthly returns, N = {N}")
+#     plt.legend()
+#     plt.show()
+#
+#
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["IC1"],label = "IC1")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["TKCV"],label = "TKCV")
+#     #plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["one_over_n"],label = "1/n")
+#     plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
+#     plt.title(f"monthly returns, N = {N}")
+#     plt.legend()
+#     plt.show()
+#
+#
+#     plt.figure(figsize=(6.4 * 1.5, 4.8))
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["GR"],label = "GR")
+#     plt.plot(results_monthly_df["UTCTIME"],results_monthly_df["TKCV"],label = "TKCV")
+#     plt.plot(results_monthly_df["UTCTIME"],np.zeros(len(results_monthly_df["ER"])),"k--")
+#     plt.title(f"comparison of monthly returns, N = {N}")
+#     plt.legend()
+#     plt.savefig(os.path.join(get_results_path(),f"returns_comparison_2_N_{N}_years{years}.{figure_extension}"))
+#     #plt.show()
+#
+#
+#
 #
 # fig = optim_subplots_double(m_star_df,c_star_df,f"estimated M and c_star, N = {N}")
 # fig.savefig(os.path.join(get_results_path(),f"estimated_M_and_c_star_N_{N}.png"))
 # plt.show()
-
-
-
+#
+#
+#
 # plt.plot(k_hat_df["ER_k_hat"],label="ER")
 # plt.plot(k_hat_df["GR_k_hat"],label="GR")
 # plt.plot(k_hat_df["BIC3_k_hat"],label="BIC3")
